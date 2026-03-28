@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Free Brand Presence Audit | All Ways Posted</title>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700;800;900&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --gold: #C4982E; --gold-light: #E0B44C; --gold-dark: #A67B1B;
+      --navy: #1E2B3C; --navy-light: #2D3E55; --navy-dark: #121B27;
+      --white: #FFFFFF; --warm-gray: #F5F2EE;
+      --slate-200: #E2E8F0; --slate-400: #94A3B8; --slate-500: #64748B;
+    }
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body { background:var(--navy-dark); color:var(--white); font-family:'DM Sans',sans-serif; min-height:100vh; }
+    h1,h2,h3 { font-family:'Barlow Condensed',sans-serif; text-transform:uppercase; font-weight:800; line-height:1; }
+
+    /* ── HERO ── */
+    .hero {
+      background: linear-gradient(180deg, #121B27 0%, #1E2B3C 100%);
+      padding: 5rem 2rem 4rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content:'';
+      position:absolute; top:-100px; left:50%;
+      transform:translateX(-50%);
+      width:600px; height:600px;
+      background:radial-gradient(circle, rgba(196,152,46,0.1) 0%, transparent 70%);
+      border-radius:50%;
+    }
+    .hero-tag {
+      display:inline-block;
+      background:rgba(196,152,46,0.15);
+      border:1px solid rgba(196,152,46,0.4);
+      padding:0.4rem 1.25rem;
+      border-radius:50px;
+      font-family:'Barlow Condensed',sans-serif;
+      font-size:0.8rem;
+      letter-spacing:0.25em;
+      color:var(--gold-light);
+      text-transform:uppercase;
+      margin-bottom:1.5rem;
+    }
+    .hero h1 {
+      font-size: clamp(2.8rem, 6vw, 5rem);
+      color: var(--white);
+      margin-bottom: 1.25rem;
+      letter-spacing: 0.03em;
+    }
+    .hero h1 span { color: var(--gold); }
+    .hero p {
+      font-size: 1.15rem;
+      color: var(--slate-400);
+      max-width: 560px;
+      margin: 0 auto 2.5rem;
+      line-height: 1.6;
+    }
+    .checks {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-bottom: 3rem;
+    }
+    .check-item {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.85rem;
+      color: var(--slate-400);
+    }
+    .check-item::before {
+      content: '✓';
+      color: var(--gold);
+      font-weight: 700;
+    }
+
+    /* ── FORM CARD ── */
+    .form-card {
+      background: var(--warm-gray);
+      border-radius: 24px 24px 0 0;
+      padding: 3rem 2rem 4rem;
+      min-height: 50vh;
+    }
+    .form-inner { max-width: 680px; margin: 0 auto; }
+
+    /* ── STEPS ── */
+    .steps {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0;
+      margin-bottom: 3rem;
+    }
+    .step {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+    .step-circle {
+      width: 36px; height: 36px;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 1rem;
+      font-weight: 900;
+      transition: all 0.3s;
+      border: 2px solid #CBD5E1;
+      color: #94A3B8;
+      background: transparent;
+    }
+    .step-circle.active { background: var(--navy); border-color: var(--navy); color: var(--white); }
+    .step-circle.done { background: var(--gold); border-color: var(--gold); color: var(--navy-dark); }
+    .step-label {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #94A3B8;
+    }
+    .step-label.active { color: var(--navy); }
+    .step-line { width: 40px; height: 2px; background: #CBD5E1; margin: 0 0.5rem; }
+
+    /* ── FORM FIELDS ── */
+    .step-panel { display: none; }
+    .step-panel.active { display: block; }
+
+    .step-title {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 2rem;
+      color: var(--navy);
+      margin-bottom: 0.5rem;
+      letter-spacing: 0.03em;
+    }
+    .step-subtitle {
+      font-size: 0.95rem;
+      color: var(--slate-500);
+      margin-bottom: 2rem;
+      line-height: 1.5;
+    }
+
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem; }
+    .form-row.single { grid-template-columns: 1fr; }
+    @media(max-width:560px) { .form-row { grid-template-columns: 1fr; } }
+
+    .field { display: flex; flex-direction: column; gap: 0.4rem; }
+    .field label {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 0.75rem;
+      letter-spacing: 0.15em;
+      color: var(--slate-500);
+      text-transform: uppercase;
+      font-weight: 800;
+    }
+    .field label span { color: var(--gold-dark); }
+    .field input, .field select {
+      background: var(--white);
+      border: 2px solid var(--slate-200);
+      border-radius: 10px;
+      padding: 0.85rem 1rem;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.95rem;
+      color: var(--navy);
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    .field input:focus, .field select:focus { border-color: var(--gold); }
+    .field input.optional { border-style: dashed; }
+    .field-hint { font-size: 0.78rem; color: var(--slate-400); }
+
+    .social-section-title {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 1rem;
+      letter-spacing: 0.1em;
+      color: var(--navy);
+      text-transform: uppercase;
+      margin: 1.5rem 0 0.75rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 1px solid var(--slate-200);
+    }
+
+    /* ── BUTTONS ── */
+    .btn-row { display: flex; justify-content: space-between; align-items: center; margin-top: 2rem; gap: 1rem; }
+    .btn-back {
+      background: transparent;
+      border: 2px solid #CBD5E1;
+      color: var(--slate-500);
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 1rem;
+      letter-spacing: 0.1em;
+      font-weight: 800;
+      padding: 0.85rem 1.75rem;
+      border-radius: 50px;
+      cursor: pointer;
+      text-transform: uppercase;
+      transition: all 0.2s;
+    }
+    .btn-back:hover { border-color: var(--navy); color: var(--navy); }
+    .btn-next {
+      background: var(--navy);
+      border: none;
+      color: var(--white);
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 1.1rem;
+      letter-spacing: 0.1em;
+      font-weight: 900;
+      padding: 0.9rem 2.25rem;
+      border-radius: 50px;
+      cursor: pointer;
+      text-transform: uppercase;
+      transition: all 0.2s;
+      flex: 1;
+      max-width: 280px;
+    }
+    .btn-next:hover { background: var(--navy-light); }
+    .btn-submit {
+      background: var(--gold);
+      border: none;
+      color: var(--navy-dark);
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 1.1rem;
+      letter-spacing: 0.1em;
+      font-weight: 900;
+      padding: 0.9rem 2.25rem;
+      border-radius: 50px;
+      cursor: pointer;
+      text-transform: uppercase;
+      transition: all 0.2s;
+      flex: 1;
+      max-width: 320px;
+    }
+    .btn-submit:hover { background: var(--gold-light); }
+    .btn-submit:disabled { opacity: 0.6; cursor: not-allowed; }
+
+    /* ── LOADING STATE ── */
+    #loading-state {
+      display: none;
+      text-align: center;
+      padding: 4rem 2rem;
+    }
+    .spinner {
+      width: 52px; height: 52px;
+      border: 4px solid #CBD5E1;
+      border-top: 4px solid var(--gold);
+      border-radius: 50%;
+      animation: spin 0.9s linear infinite;
+      margin: 0 auto 1.5rem;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    #loading-state h2 { font-size: 1.8rem; color: var(--navy); margin-bottom: 0.75rem; }
+    #loading-state p { color: var(--slate-500); font-size: 0.95rem; }
+
+    .progress-items { margin: 1.5rem auto; max-width: 320px; text-align: left; }
+    .progress-item {
+      display: flex; align-items: center; gap: 0.75rem;
+      font-size: 0.88rem; color: var(--slate-500);
+      padding: 0.4rem 0;
+    }
+    .progress-item .dot {
+      width: 8px; height: 8px; border-radius: 50%;
+      background: #CBD5E1; flex-shrink: 0;
+      transition: background 0.3s;
+    }
+    .progress-item.done .dot { background: var(--gold); }
+    .progress-item.done { color: var(--navy); }
+
+    /* ── SUCCESS STATE ── */
+    #success-state {
+      display: none;
+      text-align: center;
+      padding: 4rem 2rem;
+    }
+    .success-icon {
+      width: 72px; height: 72px;
+      background: var(--gold);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 2rem;
+      margin: 0 auto 1.5rem;
+    }
+    #success-state h2 { font-size: 2rem; color: var(--navy); margin-bottom: 0.75rem; }
+    #success-state p { color: var(--slate-500); max-width: 420px; margin: 0 auto; font-size: 0.95rem; line-height: 1.6; }
+
+    /* ── ERROR ── */
+    .field-error { font-size: 0.8rem; color: #dc2626; }
+    .error-banner {
+      background: #fee2e2;
+      border: 1px solid #fecaca;
+      border-radius: 8px;
+      padding: 0.75rem 1rem;
+      color: #b91c1c;
+      font-size: 0.88rem;
+      margin-bottom: 1rem;
+      display: none;
+    }
+
+    /* ── FOOTER ── */
+    .site-footer { text-align: center; padding: 2rem; color: var(--slate-400); font-size: 0.8rem; }
+  </style>
+</head>
+<body>
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-tag">Free · No Paid Tools · Delivered to Your Inbox</div>
+    <h1>Get Your Free<br><span>Brand Presence Audit</span></h1>
+    <p>We'll analyze your website, social media presence, and Google visibility — then email you a full report with exactly what to fix, in priority order.</p>
+    <div class="checks">
+      <div class="check-item">Website health check</div>
+      <div class="check-item">Social profile audit</div>
+      <div class="check-item">Technical SEO signals</div>
+      <div class="check-item">Prioritized action plan</div>
+    </div>
+  </div>
+
+  <!-- FORM -->
+  <div class="form-card">
+    <div class="form-inner">
+
+      <!-- Steps indicator -->
+      <div class="steps" id="steps-indicator">
+        <div class="step">
+          <div class="step-circle active" id="step-circle-1">1</div>
+          <div class="step-label active" id="step-label-1">Your Business</div>
+        </div>
+        <div class="step-line"></div>
+        <div class="step">
+          <div class="step-circle" id="step-circle-2">2</div>
+          <div class="step-label" id="step-label-2">Social Profiles</div>
+        </div>
+        <div class="step-line"></div>
+        <div class="step">
+          <div class="step-circle" id="step-circle-3">3</div>
+          <div class="step-label" id="step-label-3">Get Your Report</div>
+        </div>
+      </div>
+
+      <div id="error-banner" class="error-banner"></div>
+
+      <!-- STEP 1 -->
+      <div class="step-panel active" id="panel-1">
+        <h2 class="step-title">Tell Us About Your Business</h2>
+        <p class="step-subtitle">We'll use this to run your audit and personalize your report.</p>
+
+        <div class="form-row">
+          <div class="field">
+            <label>Business Name <span>*</span></label>
+            <input type="text" id="businessName" placeholder="Acme Roofing Co." autocomplete="organization">
+          </div>
+          <div class="field">
+            <label>Industry / Niche</label>
+            <input type="text" id="industry" placeholder="Roofing, Coaching, Law..." autocomplete="off">
+          </div>
+        </div>
+
+        <div class="form-row single">
+          <div class="field">
+            <label>Website URL <span>*</span></label>
+            <input type="url" id="websiteUrl" placeholder="https://yourdomain.com" autocomplete="url">
+            <span class="field-hint">Include https:// — we'll crawl this live.</span>
+          </div>
+        </div>
+
+        <div class="btn-row" style="justify-content:flex-end;">
+          <button class="btn-next" onclick="goToStep(2)">Next: Social Profiles →</button>
+        </div>
+      </div>
+
+      <!-- STEP 2 -->
+      <div class="step-panel" id="panel-2">
+        <h2 class="step-title">Your Social Profiles</h2>
+        <p class="step-subtitle">Enter any handles you use. All fields are optional — leave blank what you don't have.</p>
+
+        <div class="social-section-title">Enter handles or full URLs</div>
+
+        <div class="form-row">
+          <div class="field">
+            <label>Facebook</label>
+            <input type="text" id="facebook" placeholder="JohnLawsonHQ" class="optional" autocomplete="off">
+          </div>
+          <div class="field">
+            <label>Instagram</label>
+            <input type="text" id="instagram" placeholder="colderice" class="optional" autocomplete="off">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="field">
+            <label>X / Twitter</label>
+            <input type="text" id="twitter" placeholder="ColderICE" class="optional" autocomplete="off">
+          </div>
+          <div class="field">
+            <label>LinkedIn</label>
+            <input type="text" id="linkedin" placeholder="in/colderice" class="optional" autocomplete="off">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="field">
+            <label>YouTube</label>
+            <input type="text" id="youtube" placeholder="@colderice" class="optional" autocomplete="off">
+          </div>
+          <div class="field">
+            <label>TikTok</label>
+            <input type="text" id="tiktok" placeholder="@handle" class="optional" autocomplete="off">
+          </div>
+        </div>
+
+        <div class="btn-row">
+          <button class="btn-back" onclick="goToStep(1)">← Back</button>
+          <button class="btn-next" onclick="goToStep(3)">Next: Get Your Report →</button>
+        </div>
+      </div>
+
+      <!-- STEP 3 -->
+      <div class="step-panel" id="panel-3">
+        <h2 class="step-title">Where Should We Send It?</h2>
+        <p class="step-subtitle">Your report will be emailed within a few minutes. We don't spam — this is a one-time send.</p>
+
+        <div class="form-row">
+          <div class="field">
+            <label>First Name</label>
+            <input type="text" id="firstName" placeholder="John" autocomplete="given-name">
+          </div>
+          <div class="field">
+            <label>Email Address <span>*</span></label>
+            <input type="email" id="email" placeholder="you@yourdomain.com" autocomplete="email">
+          </div>
+        </div>
+
+        <div style="background:rgba(196,152,46,0.08);border:1px solid rgba(196,152,46,0.25);border-radius:10px;padding:1rem 1.25rem;margin:1.5rem 0;">
+          <div style="font-family:'Barlow Condensed',sans-serif;font-size:0.85rem;color:#A67B1B;text-transform:uppercase;letter-spacing:0.1em;font-weight:800;margin-bottom:0.5rem;">What You're Getting</div>
+          <div style="font-size:0.88rem;color:#475569;line-height:1.7;">
+            ✓ &nbsp;Website technical health check<br>
+            ✓ &nbsp;Social media profile audit<br>
+            ✓ &nbsp;Critical issues flagged with fixes<br>
+            ✓ &nbsp;Prioritized this week / this month / this quarter action plan<br>
+            ✓ &nbsp;Branded PDF-quality report — yours to keep
+          </div>
+        </div>
+
+        <div class="btn-row">
+          <button class="btn-back" onclick="goToStep(2)">← Back</button>
+          <button class="btn-submit" id="submit-btn" onclick="submitAudit()">Run My Free Audit 🚀</button>
+        </div>
+      </div>
+
+      <!-- LOADING -->
+      <div id="loading-state">
+        <div class="spinner"></div>
+        <h2>Running Your Audit...</h2>
+        <p>We're analyzing your website and social profiles right now.</p>
+        <div class="progress-items">
+          <div class="progress-item" id="prog-1"><div class="dot"></div>Crawling your website</div>
+          <div class="progress-item" id="prog-2"><div class="dot"></div>Checking technical signals</div>
+          <div class="progress-item" id="prog-3"><div class="dot"></div>Auditing social profiles</div>
+          <div class="progress-item" id="prog-4"><div class="dot"></div>Building your report</div>
+          <div class="progress-item" id="prog-5"><div class="dot"></div>Sending to your inbox</div>
+        </div>
+      </div>
+
+      <!-- SUCCESS -->
+      <div id="success-state">
+        <div class="success-icon">✓</div>
+        <h2>Your Report Is On Its Way</h2>
+        <p>Check your inbox in the next few minutes. If you don't see it, check your spam folder.</p>
+        <div style="margin-top:2.5rem;">
+          <a href="https://allwaysposted.com" style="display:inline-block;background:var(--gold);color:var(--navy-dark);font-family:'Barlow Condensed',sans-serif;font-size:1rem;letter-spacing:0.1em;font-weight:900;padding:0.85rem 2rem;border-radius:50px;text-decoration:none;text-transform:uppercase;">See How All Ways Posted Works →</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="site-footer">
+    All Ways Posted &nbsp;·&nbsp; allwaysposted.com &nbsp;·&nbsp; Free audit, no spam, no commitment.
+  </div>
+
+  <script>
+    let currentStep = 1;
+
+    function goToStep(step) {
+      const errorBanner = document.getElementById('error-banner');
+      errorBanner.style.display = 'none';
+
+      // Validate before advancing
+      if (step > currentStep) {
+        if (currentStep === 1) {
+          const name = document.getElementById('businessName').value.trim();
+          const url = document.getElementById('websiteUrl').value.trim();
+          if (!name) { showError('Please enter your business name.'); return; }
+          if (!url) { showError('Please enter your website URL.'); return; }
+          if (!url.includes('.')) { showError('Please enter a valid website URL.'); return; }
+        }
+      }
+
+      // Hide current
+      document.getElementById(`panel-${currentStep}`).classList.remove('active');
+      updateStep(currentStep, step > currentStep ? 'done' : 'inactive');
+
+      currentStep = step;
+
+      // Show new
+      document.getElementById(`panel-${step}`).classList.add('active');
+      updateStep(step, 'active');
+    }
+
+    function updateStep(num, state) {
+      const circle = document.getElementById(`step-circle-${num}`);
+      const label = document.getElementById(`step-label-${num}`);
+      circle.className = 'step-circle ' + state;
+      if (state === 'done') circle.textContent = '✓';
+      else circle.textContent = num;
+      label.className = 'step-label ' + (state === 'active' ? 'active' : '');
+    }
+
+    function showError(msg) {
+      const b = document.getElementById('error-banner');
+      b.textContent = msg;
+      b.style.display = 'block';
+      window.scrollTo(0, 0);
+    }
+
+    async function submitAudit() {
+      const email = document.getElementById('email').value.trim();
+      if (!email || !email.includes('@')) {
+        showError('Please enter a valid email address.');
+        return;
+      }
+
+      // Hide form, show loading
+      document.getElementById('steps-indicator').style.display = 'none';
+      document.getElementById(`panel-3`).classList.remove('active');
+      document.getElementById('loading-state').style.display = 'block';
+
+      // Animate progress items
+      const delays = [600, 1400, 2400, 3600, 4800];
+      delays.forEach((d, i) => {
+        setTimeout(() => {
+          document.getElementById(`prog-${i + 1}`).classList.add('done');
+        }, d);
+      });
+
+      const payload = {
+        businessName: document.getElementById('businessName').value.trim(),
+        websiteUrl: document.getElementById('websiteUrl').value.trim(),
+        industry: document.getElementById('industry').value.trim(),
+        firstName: document.getElementById('firstName').value.trim(),
+        email,
+        facebook: document.getElementById('facebook').value.trim(),
+        instagram: document.getElementById('instagram').value.trim(),
+        twitter: document.getElementById('twitter').value.trim(),
+        linkedin: document.getElementById('linkedin').value.trim(),
+        youtube: document.getElementById('youtube').value.trim(),
+        tiktok: document.getElementById('tiktok').value.trim()
+      };
+
+      try {
+        const res = await fetch('/audit', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+
+        const data = await res.json();
+
+        if (!res.ok) throw new Error(data.error || 'Something went wrong.');
+
+        // Wait for progress animation to finish, then show success
+        setTimeout(() => {
+          document.getElementById('loading-state').style.display = 'none';
+          document.getElementById('success-state').style.display = 'block';
+        }, 5500);
+
+      } catch (err) {
+        document.getElementById('loading-state').style.display = 'none';
+        document.getElementById('steps-indicator').style.display = 'flex';
+        document.getElementById(`panel-3`).classList.add('active');
+        showError('Something went wrong: ' + err.message + '. Please try again.');
+      }
+    }
+  </script>
+</body>
+</html>

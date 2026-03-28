@@ -1,0 +1,23 @@
+{
+  "name": "awp-brand-audit",
+  "version": "1.0.0",
+  "description": "All Ways Posted — Brand Presence Audit Tool",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "nodemon server.js"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "dependencies": {
+    "axios": "^1.6.0",
+    "cheerio": "^1.0.0",
+    "express": "^4.18.2",
+    "nodemailer": "^6.9.7",
+    "uuid": "^9.0.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.2"
+  }
+}
