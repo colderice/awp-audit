@@ -60,11 +60,9 @@ app.post('/audit', async (req, res) => {
 
   const socialHandles = { facebook, linkedin, twitter, instagram, youtube, tiktok };
 
-  // Send immediate response so the UI can show progress
   const reportId = uuidv4();
-  res.json({ reportId, message: 'Audit started. Your report will be emailed shortly.' });
 
-  // Run audit async
+  // Run audit sync with the request so we can return the ID after it's built
   try {
     console.log(`[${reportId}] Starting audit for ${url}`);
 
@@ -87,18 +85,25 @@ app.post('/audit', async (req, res) => {
 
     const reportUrl = `${process.env.APP_URL || 'http://localhost:' + PORT}/report/${reportId}`;
 
-    // Send email
-    await sendReportEmail({
+    // Return immediately to frontend so they can view it
+    res.json({ reportId, message: 'Audit complete. Redirecting...' });
+
+    // Send email async as a backup, don't await it so it doesn't hold up the UI
+    sendReportEmail({
       toEmail: email,
       toName: firstName || businessName,
       businessName,
       reportUrl,
       reportHtml
+    }).then(() => {
+      console.log(`[${reportId}] Audit complete. Report emailed to ${email}`);
+    }).catch(err => {
+      console.error(`[${reportId}] Email failed but report was generated:`, err.message);
     });
 
-    console.log(`[${reportId}] Audit complete. Report emailed to ${email}`);
   } catch (err) {
     console.error(`[${reportId}] Audit failed:`, err.message);
+    res.status(500).json({ error: 'Failed to generate audit. Please check the URL and try again.' });
   }
 });
 
