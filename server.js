@@ -101,6 +101,32 @@ app.post('/audit', async (req, res) => {
       console.error(`[${reportId}] Email failed but report was generated:`, err.message);
     });
 
+    // Send to Google Sheets Webhook if configured
+    if (process.env.GOOGLE_SHEET_WEBHOOK_URL) {
+      const axios = require('axios'); // Load axios for webhook
+      const sheetData = {
+        date: new Date().toISOString(),
+        firstName,
+        email,
+        businessName,
+        industry,
+        websiteUrl: url,
+        score: auditData.scores.overallPct,
+        grade: auditData.scores.overall,
+        reportUrl,
+        facebook,
+        instagram,
+        twitter,
+        linkedin,
+        youtube,
+        tiktok
+      };
+      
+      axios.post(process.env.GOOGLE_SHEET_WEBHOOK_URL, sheetData)
+        .then(() => console.log(`[${reportId}] Lead data sent to Google Sheets.`))
+        .catch(err => console.error(`[${reportId}] Failed to send data to Google Sheets:`, err.message));
+    }
+
   } catch (err) {
     console.error(`[${reportId}] Audit failed:`, err.message);
     res.status(500).json({ error: 'Failed to generate audit. Please check the URL and try again.' });
