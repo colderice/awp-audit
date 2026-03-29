@@ -298,8 +298,59 @@
       display: none;
     }
 
+    /* ── TESTIMONIALS ── */
+    .testimonials { 
+      padding: 4rem 2rem; 
+      max-width: 1100px; 
+      margin: 0 auto; 
+    }
+    .testimonials-title { 
+      text-align: center; 
+      font-family: 'Barlow Condensed', sans-serif; 
+      font-size: 1.5rem; 
+      color: var(--gold); 
+      margin-bottom: 3rem; 
+      letter-spacing: 0.15em;
+    }
+    .testimonial-grid { 
+      display: grid; 
+      grid-template-columns: repeat(3, 1fr); 
+      gap: 2rem; 
+    }
+    @media(max-width: 900px) { .testimonial-grid { grid-template-columns: 1fr; } }
+    .testimonial-card { 
+      background: rgba(255,255,255,0.03); 
+      border: 1px solid rgba(255,255,255,0.05); 
+      padding: 2rem; 
+      border-radius: 16px; 
+      position: relative;
+    }
+    .testimonial-card::before {
+      content: '"';
+      position: absolute;
+      top: 10px; left: 20px;
+      font-size: 4rem;
+      color: var(--gold);
+      opacity: 0.2;
+      font-family: serif;
+    }
+    .testimonial-text { 
+      font-size: 0.95rem; 
+      line-height: 1.7; 
+      color: var(--slate-400); 
+      margin-bottom: 1.5rem; 
+      position: relative;
+    }
+    .testimonial-author { 
+      font-family: 'Barlow Condensed', sans-serif; 
+      font-size: 1rem; 
+      text-transform: uppercase; 
+      color: var(--white); 
+      letter-spacing: 0.05em;
+    }
+
     /* ── FOOTER ── */
-    .site-footer { text-align: center; padding: 2rem; color: var(--slate-400); font-size: 0.8rem; }
+    .site-footer { text-align: center; padding: 4rem 2rem 2rem; color: var(--slate-500); font-size: 0.8rem; border-top: 1px solid rgba(255,255,255,0.05); }
   </style>
 </head>
 <body>
@@ -308,7 +359,7 @@
   <div class="hero">
     <div class="hero-tag">Free · No Paid Tools · Generated Instantly</div>
     <h1>Get Your Free<br><span>Brand Presence Audit</span></h1>
-    <p>We'll analyze your website, social media presence, and Google visibility — then generate a full live report with exactly what to fix, in priority order.</p>
+    <p>We'll analyze your website and social media presence, then show you a full report — <strong>live on your screen in about 90 seconds. No email required. No waiting.</strong></p>
     <div class="checks">
       <div class="check-item">Website health check</div>
       <div class="check-item">Social profile audit</div>
@@ -380,31 +431,31 @@
         <div class="form-row">
           <div class="field">
             <label>Facebook</label>
-            <input type="text" id="facebook" class="optional" autocomplete="off">
+            <input type="text" id="facebook" class="optional" autocomplete="off" placeholder="e.g. @yourbusiness">
           </div>
           <div class="field">
             <label>Instagram</label>
-            <input type="text" id="instagram" class="optional" autocomplete="off">
+            <input type="text" id="instagram" class="optional" autocomplete="off" placeholder="e.g. @yourbusiness">
           </div>
         </div>
         <div class="form-row">
           <div class="field">
             <label>X / Twitter</label>
-            <input type="text" id="twitter" class="optional" autocomplete="off">
+            <input type="text" id="twitter" class="optional" autocomplete="off" placeholder="e.g. @yourbusiness">
           </div>
           <div class="field">
             <label>LinkedIn</label>
-            <input type="text" id="linkedin" class="optional" autocomplete="off">
+            <input type="text" id="linkedin" class="optional" autocomplete="off" placeholder="e.g. @yourbusiness">
           </div>
         </div>
         <div class="form-row">
           <div class="field">
             <label>YouTube</label>
-            <input type="text" id="youtube" class="optional" autocomplete="off">
+            <input type="text" id="youtube" class="optional" autocomplete="off" placeholder="e.g. @yourbusiness">
           </div>
           <div class="field">
             <label>TikTok</label>
-            <input type="text" id="tiktok" class="optional" autocomplete="off">
+            <input type="text" id="tiktok" class="optional" autocomplete="off" placeholder="e.g. @yourbusiness">
           </div>
         </div>
 
@@ -427,6 +478,7 @@
           <div class="field">
             <label>Email Address <span>*</span></label>
             <input type="email" id="email" autocomplete="email">
+            <span class="field-hint">No spam. Your report arrives on screen instantly.</span>
           </div>
         </div>
 
@@ -463,16 +515,30 @@
       <!-- SUCCESS -->
       <div id="success-state">
         <div class="success-icon">✓</div>
-        <h2>Your Report Is On Its Way</h2>
-        <p>Check your inbox in the next few minutes. If you don't see it, check your spam folder.</p>
-        <div style="margin-top:2.5rem;">
-          <a href="https://allwaysposted.com" style="display:inline-block;background:var(--gold);color:var(--navy-dark);font-family:'Barlow Condensed',sans-serif;font-size:1rem;letter-spacing:0.1em;font-weight:900;padding:0.85rem 2rem;border-radius:50px;text-decoration:none;text-transform:uppercase;">See How All Ways Posted Works →</a>
-        </div>
+        <h2>Audit Complete</h2>
+        <p>Your report is loading now — redirecting you in a moment.</p>
       </div>
 
     </div>
   </div>
-
+  <!-- TESTIMONIALS -->
+  <div class="testimonials">
+    <h2 class="testimonials-title">Trusted by Business Owners</h2>
+    <div class="testimonial-grid">
+      <div class="testimonial-card">
+        <p class="testimonial-text">Yes this was accurate and very helpful. The action steps and estimated time needed is helpful. I like having a grade. It was a C for me but now I've got a baseline grade to work from. The simplicity of the information I put in was a bonus.</p>
+        <div class="testimonial-author">Carmen Caldwell</div>
+      </div>
+      <div class="testimonial-card">
+        <p class="testimonial-text">Yes, it worked and it is accurate. It told me to claim my Google business profile and to add social media links to my website. It also gave the advice to categorize my blogs and to update my site description. It is time to do that.</p>
+        <div class="testimonial-author">Jennifer Jasper</div>
+      </div>
+      <div class="testimonial-card">
+        <p class="testimonial-text">I have an SEO audit process that I got from my consultant and from that lens I can tell you the test was accurate. 2 of the things it recommended my team was working on last week. All in all, cool and useful.</p>
+        <div class="testimonial-author">Chrysta Wilson</div>
+      </div>
+    </div>
+  </div>
   <div class="site-footer">
     All Ways Posted &nbsp;·&nbsp; allwaysposted.com &nbsp;·&nbsp; Free audit, no spam, no commitment.
   </div>
