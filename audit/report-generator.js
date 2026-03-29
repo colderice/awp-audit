@@ -120,7 +120,15 @@ function generateReport(data) {
   `;
 
   // Action plan items
-  const immediateActions = [];
+  const immediateActions = [
+    { 
+      title: 'READY TO FIX YOUR BRAND AWARENESS GAP?', 
+      body: 'Your report shows where you need more visibility. Here\'s how to solve it without spending 20+ hours weekly on content:<br><br>Set up AI employees that handle:<br>✅ Consistent social media posting (Sonny)<br>✅ SEO blog content that ranks (Penny)<br>✅ Email campaigns that convert (Eva)<br><br>👉 <a href="https://marblism.com?via=john-lawson" target="_blank" style="color:#1E2B3C;font-weight:bold;text-decoration:underline;">Get Marblism now with 25% off</a><br>Use code <strong>JOHN</strong> at checkout = $29/month instead of $39<br><br>Start building your brand presence today.', 
+      impact: 'High', 
+      time: '1 hour', 
+      urgent: false 
+    }
+  ];
   if (h.hasLoremIpsum) immediateActions.push({ title: 'Remove Lorem Ipsum Content', body: 'Find and replace all placeholder text on live pages. This is actively hurting credibility right now.', impact: 'Critical', time: '30 min', urgent: true });
   if (h.hasPlaceholderBrackets) immediateActions.push({ title: 'Fix Template Placeholders', body: 'Replace all bracketed placeholders (e.g., "[Your Company Name]") with real content. Check Privacy Policy, Terms, and Disclaimer pages.', impact: 'Critical', time: '30 min', urgent: true });
   if (!h.metaDesc) immediateActions.push({ title: 'Write a Meta Description', body: 'One sentence that tells Google and humans exactly what you do. This controls your search snippet on every result page.', impact: 'High', time: '10 min', urgent: false });
@@ -282,10 +290,28 @@ function generateReport(data) {
 
   <!-- CTA -->
   <div style="background:linear-gradient(135deg,#1E2B3C 0%,#121B27 100%);border:3px solid #C4982E;border-radius:16px;padding:2.5rem;text-align:center;margin-top:3rem;">
-    <h2 style="font-size:2.2rem;color:#fff;margin-bottom:1rem;">The Problem Isn't Strategy.<br>It's Consistency.</h2>
-    <p style="color:#CBD5E1;font-size:1rem;max-width:560px;margin:0 auto 1.75rem;">Most businesses know what they should post. They just don't have the systems to post consistently without it falling through the cracks. That's exactly what All Ways Posted handles — so your feed stays active and your brand stays visible.</p>
-    <a href="https://allwaysposted.com" style="display:inline-block;background:#C4982E;color:#121B27;font-family:'Barlow Condensed',sans-serif;font-size:1.1rem;letter-spacing:0.1em;font-weight:900;padding:1rem 2.5rem;border-radius:50px;text-decoration:none;text-transform:uppercase;">Get 3 Free Posts — See What Consistent Looks Like</a>
-    <p style="margin-top:1.25rem;font-size:0.8rem;color:#94A3B8;">allwaysposted.com &nbsp;·&nbsp; No commitment required</p>
+    <h2 style="font-size:2.2rem;color:#fff;margin-bottom:1.5rem;line-height:1.2;">IF YOUR BRAND AWARENESS IS LOW,<br>IT'S BECAUSE OF THIS:</h2>
+    <div style="color:#CBD5E1;font-size:1.05rem;max-width:600px;margin:0 auto 2rem;line-height:1.6;text-align:left;">
+      <p style="margin-bottom:1rem;">You're not posting enough.<br>You're not creating enough content.<br>You're not staying top-of-mind.</p>
+      
+      <p style="margin-bottom:1rem;">You KNOW you should be doing these things. But between client work, operations, and actually running your business... who has 20 hours a week for marketing?</p>
+
+      <p style="margin-bottom:1.5rem;">The solution isn't "try harder." The solution is <strong>automation</strong>.</p>
+
+      <p style="margin-bottom:0.8rem;color:#E0B44C;font-weight:bold;">Marblism AI Employees:</p>
+      <ul style="list-style:none;padding:0;margin-bottom:1.5rem;">
+        <li style="margin-bottom:0.3rem;">✅ Post social content 5-7x per week (Sonny)</li>
+        <li style="margin-bottom:0.3rem;">✅ Write SEO blog posts monthly (Penny)</li>
+        <li style="margin-bottom:0.3rem;">✅ Send email campaigns automatically (Eva)</li>
+      </ul>
+
+      <p style="margin-bottom:2rem;font-weight:bold;color:#fff;">Setup: 1 hour<br>Cost: $29/month (with my discount)<br>Result: Consistent brand presence without the manual work</p>
+    </div>
+    
+    <a href="https://marblism.com?via=john-lawson" target="_blank" style="display:inline-block;background:#C4982E;color:#121B27;font-family:'Barlow Condensed',sans-serif;font-size:1.1rem;letter-spacing:0.1em;font-weight:900;padding:1rem 2.5rem;border-radius:50px;text-decoration:none;text-transform:uppercase;">Get Marblism Here</a>
+    
+    <p style="margin-top:1.5rem;font-size:1.1rem;color:#E0B44C;font-weight:bold;">💰 Use code JOHN at checkout for 25% off = $29/month instead of $39</p>
+    <p style="margin-top:1rem;font-size:0.9rem;color:#94A3B8;">Stop letting low brand awareness kill your growth.</p>
   </div>
 
   <!-- DISCLAIMER -->
